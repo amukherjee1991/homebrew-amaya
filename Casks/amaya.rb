@@ -13,6 +13,18 @@ cask "amaya" do
   app "Amaya.app"
   binary "#{appdir}/Amaya.app/Contents/MacOS/amaya"
 
+  # Unsigned preview build (no Apple Developer ID yet): left quarantined,
+  # syspolicyd repeatedly retries an online notarization check that can
+  # never succeed and removes the app on quit once it gives up - a bare
+  # right-click -> Open bypass isn't enough to stop that, the flag itself
+  # has to go before the first launch. See docs/PLATFORMS_PLAN.md in the
+  # browser repo.
+  postflight do
+    system_command "/usr/bin/xattr",
+                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Amaya.app"],
+                    sudo: false
+  end
+
   zap trash: [
     "~/Library/Application Support/Amaya",
     "~/Library/Caches/Amaya",
@@ -22,8 +34,10 @@ cask "amaya" do
   ]
 
   caveats <<~EOS
-    This is an UNSIGNED preview build (no Apple Developer ID yet): macOS
-    Gatekeeper will refuse to open it until you clear the quarantine flag:
+    This is an UNSIGNED preview build (no Apple Developer ID yet). The
+    quarantine flag is cleared automatically on install. If you instead
+    downloaded the .dmg by hand (not via brew), clear it yourself before
+    the first launch:
 
       xattr -dr com.apple.quarantine "#{appdir}/Amaya.app"
 
