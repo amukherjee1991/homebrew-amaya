@@ -20,9 +20,9 @@ cask "amaya" do
   # has to go before the first launch. See docs/PLATFORMS_PLAN.md in the
   # browser repo.
   postflight_steps do
-    system_command "/usr/bin/xattr",
-                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Amaya.app"],
-                    sudo: false
+    run "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "#{appdir}/Amaya.app"],
+        sudo: false
   end
 
   zap trash: [
