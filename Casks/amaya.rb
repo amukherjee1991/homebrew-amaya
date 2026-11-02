@@ -1,6 +1,6 @@
 cask "amaya" do
-  version "159.0-7"
-  sha256 "11988488c196a67a7fae6d13510fd27a80d73760e46a9551fbb6e1bd0fb65f16"
+  version "159.0-8"
+  sha256 "96f2c554cffe2cb28f670c1e7ade43358b3b4b002c531bca726c5cddb05c20bd"
 
   url "https://github.com/amukherjee1991/amaya-browser/releases/download/v#{version}/Amaya-#{version}-arm64.dmg"
   name "Amaya"
