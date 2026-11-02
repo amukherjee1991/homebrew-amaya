@@ -19,7 +19,7 @@ cask "amaya" do
   # right-click -> Open bypass isn't enough to stop that, the flag itself
   # has to go before the first launch. See docs/PLATFORMS_PLAN.md in the
   # browser repo.
-  postflight do
+  postflight_steps do
     system_command "/usr/bin/xattr",
                     args: ["-dr", "com.apple.quarantine", "#{appdir}/Amaya.app"],
                     sudo: false
